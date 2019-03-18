@@ -21,6 +21,9 @@ bot = Bot(console_qr=True, cache_path=True)
 
 @bot.register()
 def forward_message(msg):
-    return auto_reply(msg.text)
+    if isinstance(msg.chat, Group) and not msg.is_at:
+        return
+    else:
+        return auto_reply(msg.text)
 
 embed()
